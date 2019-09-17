@@ -17,7 +17,6 @@ PrintWriter output, finalFile;
 String filename;
 final int debounce = 1000; // time in ms to retrigger
 int pressedTime;
-final int gpioPin = 10;
 final int showIDtime = 3000; // ms
 File temp;
 String desktopPath;
