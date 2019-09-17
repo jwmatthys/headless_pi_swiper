@@ -110,7 +110,7 @@ void draw()
         e.printStackTrace();
         temp = new File("tempfile.csv");
         OscMessage myMessage2 = new OscMessage("/connected");
-        myMessage.add("Error sending. File saved.");
+        myMessage.add("Error sending");
         oscP5.send(myMessage2, myRemoteLocation);
       }
       output = createWriter(temp);
@@ -182,4 +182,12 @@ void checkConnection()
     myMessage.add(internetUp ? "Connected" : "Disconnected");
     oscP5.send(myMessage, myRemoteLocation);
   }
+}
+
+void oscEvent(OscMessage theOscMessage)
+{
+  print("### received an osc message.");
+  print(" addrpattern: "+theOscMessage.addrPattern());
+  println(" typetag: "+theOscMessage.typetag());
+  buttonPressed = true;
 }
