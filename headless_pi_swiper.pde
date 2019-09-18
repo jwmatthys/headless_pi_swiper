@@ -66,7 +66,7 @@ void draw()
   if (buttonPressed && millis() > pressedTime + debounce) 
   {
     println("saving...");
-    OscMessage myMessage = new OscMessage("/connected");
+    OscMessage myMessage = new OscMessage("/message");
     myMessage.add("Saving and sending...");
     oscP5.send(myMessage, myRemoteLocation);
 
@@ -96,7 +96,7 @@ void draw()
       t.connect("mail.gandi.net", "performancelab@matthysmusic.com", "sUz8icS3ZpVrnL");
       t.sendMessage(message, message.getAllRecipients());
       println("sent!");
-      OscMessage myMessage1 = new OscMessage("/connected");
+      OscMessage myMessage1 = new OscMessage("/message");
       myMessage.add("Sent!");
       oscP5.send(myMessage1, myRemoteLocation);
       // reload file (to add to it)
@@ -108,7 +108,7 @@ void draw()
       {
         e.printStackTrace();
         temp = new File("tempfile.csv");
-        OscMessage myMessage2 = new OscMessage("/connected");
+        OscMessage myMessage2 = new OscMessage("/message");
         myMessage.add("Error sending");
         oscP5.send(myMessage2, myRemoteLocation);
       }
@@ -177,7 +177,7 @@ void checkConnection()
   if (internetUp != internetLast)
   {
     internetLast = internetUp;
-    OscMessage myMessage = new OscMessage("/connected");
+    OscMessage myMessage = new OscMessage("/message");
     myMessage.add(internetUp ? "Connected" : "Disconnected");
     oscP5.send(myMessage, myRemoteLocation);
   }
