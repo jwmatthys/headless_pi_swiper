@@ -21,9 +21,9 @@ final int showIDtime = 3000; // ms
 File temp;
 String desktopPath;
 boolean internetUp = false;
-boolean internetLast = true;
+boolean internetLast = false;
 boolean buttonPressed = false;
-final int internetCheckTime = 5000; // ms
+final int internetCheckTime = 30000; // ms
 int lastInternetCheck;
 OscP5 oscP5;
 NetAddress myRemoteLocation;
@@ -173,12 +173,14 @@ void checkConnection()
   }
   catch (Exception e) {
     internetUp = false;
+    e.printStackTrace();
   }
   if (internetUp != internetLast)
   {
     internetLast = internetUp;
     OscMessage myMessage = new OscMessage("/message");
-    myMessage.add(internetUp ? "Connected" : "Disconnected");
+    if (internetUp) myMessage.add("Connected");
+    else myMessage.add("Disconnected");
     oscP5.send(myMessage, myRemoteLocation);
   }
 }
