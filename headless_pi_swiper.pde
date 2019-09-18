@@ -8,7 +8,8 @@ import oscP5.*;
 
 boolean acceptSwipeFlag = false;
 String defaultEvent = "Performance Lab";
-String defaultEmail = "lmclaugh@carrollu.edu";
+//String defaultEmail = "lmclaugh@carrollu.edu";
+String defaultEmail = "jmatthys@carrollu.edu";
 String text = "";
 String digits = "";
 String dateStamp;
@@ -38,6 +39,9 @@ void setup()
   //background(0);
   oscP5 = new OscP5(this, 8001);
   myRemoteLocation = new NetAddress("127.0.0.1", 8000);
+      OscMessage myMessage = new OscMessage("/message");
+    myMessage.add("Stand by...");
+    oscP5.send(myMessage, myRemoteLocation);
   try {
     temp = File.createTempFile("attendance_p5_", ".csv");
     desktopPath =System.getProperty("user.home") + "/Desktop/";
@@ -66,8 +70,8 @@ void draw()
   if (buttonPressed && millis() > pressedTime + debounce) 
   {
     println("saving...");
-    OscMessage myMessage = new OscMessage("/message");
-    myMessage.add("Saving and sending...");
+    OscMessage myMessage = new OscMessage("/name");
+    myMessage.add("Saving & sending");
     oscP5.send(myMessage, myRemoteLocation);
 
     output.flush();
@@ -96,8 +100,8 @@ void draw()
       t.connect("mail.gandi.net", "performancelab@matthysmusic.com", "sUz8icS3ZpVrnL");
       t.sendMessage(message, message.getAllRecipients());
       println("sent!");
-      OscMessage myMessage1 = new OscMessage("/message");
-      myMessage.add("Sent!");
+      OscMessage myMessage1 = new OscMessage("/name");
+      myMessage.add("Success");
       oscP5.send(myMessage1, myRemoteLocation);
       // reload file (to add to it)
       String[] lines = loadStrings(temp);
