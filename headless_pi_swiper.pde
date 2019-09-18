@@ -59,9 +59,10 @@ void setup()
   output = createWriter(temp);
   output.println("Date, Time, ID, Name");
   pressedTime = millis();
-      OscMessage myMessage = new OscMessage("/message");
-    myMessage.add("Ready for cards");
-    oscP5.send(myMessage, myRemoteLocation);
+  OscMessage myMessage = new OscMessage("/message");
+  myMessage.add("Ready for cards");
+  oscP5.send(myMessage, myRemoteLocation);
+  checkConnection();
 }
 
 void draw()
