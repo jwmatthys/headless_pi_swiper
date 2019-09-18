@@ -27,6 +27,7 @@ def nameCallback(*values):
 
 def printLCDMessage():
 	global status, name
+	lcd.clear()
 	lcd.message=status+"\n"+name
 	sleep (3)
 	lcd.clear()
